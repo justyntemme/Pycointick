@@ -24,9 +24,15 @@ else:
 	config.read(CONFIG_PATH)
 
 default_api = config['coinfetch']['api']
+tickers = get_registered_tickers()
+tickers.sort()
+
 try:
-	print('%.8f' %get_ticker("btce").get_rate("btc", "usd", "1"))
+	print('%.8f' %get_ticker(default_api).get_rate("btc", "usd", "1"))
 except KeyError:
-	print('keyerror',args.api)
+	print('keyerror')
+
+	list_sorted_apis()
+	exit(10)
 except ValueError:
 	print('valueerror')
