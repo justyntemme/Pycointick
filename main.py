@@ -6,7 +6,6 @@ from os.path import expanduser, join, exists
 from os import makedirs
 import os
 from time import sleep
-
 __title__ = 'cointick'
 __author__= 'Justyn Temme'
 
@@ -29,23 +28,13 @@ else:
 
 default_api = config['cointick']['api']
 default_currency = config['cointick']['curr']
+coins = str.split(config['cointick']['coins'],' ')
 
 load_default_plugins()
 tickers = get_registered_tickers()
 tickers.sort()
-
-try:
-	while (1==1):
-		os.system('clear')
-		print("BTC/USD \t",'%.8f' %get_ticker(default_api).get_rate('btc', default_currency, 1),"\n")
-		print("LTC/USD \t",'%.8f' %get_ticker(default_api).get_rate('ltc', default_currency, 1),"\n")
-		print("DOGE/USD \t",'%.8f' %get_ticker(default_api).get_rate('doge', default_currency, 1),"\n")
-		sleep(10)
-		
-	
-except KeyError:
-	print('keyerror')
-	print(tickers)
-	exit(10)
-except ValueError:
-	print('valueerror')
+while (1):
+	os.system("clear")
+	for String in coins:
+		print(String,"/",default_currency, "\t",'%.8f' %get_ticker(default_api).get_rate(String,default_currency, 1),"\n")
+	sleep(10)
