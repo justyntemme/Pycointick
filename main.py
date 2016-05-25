@@ -37,5 +37,3 @@ except KeyError:
 	exit(10)
 except ValueError:
 	print('valueerror')
-	print('%.8f' %get_ticker(default_api).get_rate('btc', 'ltc', '1'))
-	
