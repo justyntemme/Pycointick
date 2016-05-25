@@ -20,14 +20,15 @@ if not exists(CONFIG_PATH):
 		makedirs(CONFIG_DIR)
 	config['cointick'] = {}
 	config['cointick']['api'] = 'ccc'
-	config['cointick']['currency'] = 'usd'
+	config['cointick']['curr'] = 'usd'
+	config['cointick']['coins'] = 'btc ltc doge'
 	with open(CONFIG_PATH, 'w') as f:
 		config.write(f)
 else:
 	config.read(CONFIG_PATH)
 
 default_api = config['cointick']['api']
-default_currency = config['cointick']['currency']
+default_currency = config['cointick']['curr']
 
 load_default_plugins()
 tickers = get_registered_tickers()
@@ -36,9 +37,9 @@ tickers.sort()
 try:
 	while (1==1):
 		os.system('clear')
-		print("BTC/USD \t",'%.8f' %get_ticker(default_api).get_rate('btc', 'usd', 1),"\n")
-		print("LTC/USD \t",'%.8f' %get_ticker(default_api).get_rate('ltc', 'usd', 1),"\n")
-		print("DOGE/USD \t",'%.8f' %get_ticker(default_api).get_rate('doge', 'usd', 1),"\n")
+		print("BTC/USD \t",'%.8f' %get_ticker(default_api).get_rate('btc', default_currency, 1),"\n")
+		print("LTC/USD \t",'%.8f' %get_ticker(default_api).get_rate('ltc', default_currency, 1),"\n")
+		print("DOGE/USD \t",'%.8f' %get_ticker(default_api).get_rate('doge', default_currency, 1),"\n")
 		sleep(10)
 		
 	
