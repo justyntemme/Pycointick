@@ -21,6 +21,7 @@ if not exists(CONFIG_PATH):
 	config['cointick']['api'] = 'ccc'
 	config['cointick']['curr'] = 'usd'
 	config['cointick']['coins'] = 'btc ltc doge'
+	config['cointick']['refresh'] = '10'
 	with open(CONFIG_PATH, 'w') as f:
 		config.write(f)
 else:
@@ -29,6 +30,7 @@ else:
 default_api = config['cointick']['api']
 default_currency = config['cointick']['curr']
 coins = str.split(config['cointick']['coins'],' ')
+refresh = int(config['cointick']['refresh'])
 
 load_default_plugins()
 tickers = get_registered_tickers()
@@ -37,4 +39,4 @@ while (1):
 	os.system("clear")
 	for String in coins:
 		print(String,"/",default_currency, "\t",'%.8f' %get_ticker(default_api).get_rate(String,default_currency, 1),"\n")
-	sleep(10)
+	sleep(int(refresh))
